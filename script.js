@@ -54,9 +54,18 @@ const emptyState =
 const imageStatus =
     document.getElementById("imageStatus");
 
+const cropPanel = document.getElementById("cropPanel");
+const cropXInput = document.getElementById("cropX");
+const cropYInput = document.getElementById("cropY");
+const cropWidthInput = document.getElementById("cropWidth");
+const cropHeightInput = document.getElementById("cropHeight");
+const cropToggleBtn = document.getElementById("cropToggleBtn");
+const applyCropBtn = document.getElementById("applyCropBtn");
+const resetCropBtn = document.getElementById("resetCropBtn");
 
 // Image object
 let image = null;
+let cropRect = null;
 
 
 // ================================
@@ -93,22 +102,27 @@ imageUpload.addEventListener(
 
             image.onload = function () {
 
-                // Set canvas size according to image
+                cropRect = {
+                    x: 0,
+                    y: 0,
+                    width: image.width,
+                    height: image.height
+                };
+
                 canvas.width = image.width;
                 canvas.height = image.height;
-
 
                 canvas.style.display = "block";
 
                 emptyState.style.display = "none";
 
-
                 imageStatus.textContent =
                     file.name;
 
-
                 downloadBtn.disabled = false;
 
+                updateCropControls();
+                cropPanel.classList.remove("hidden");
 
                 drawMeme();
             };
@@ -127,12 +141,66 @@ imageUpload.addEventListener(
 // Draw Meme
 // ================================
 
+function updateCropControls() {
+    if (!image) {
+        return;
+    }
+
+    const maxX = Math.max(0, image.width - 1);
+    const maxY = Math.max(0, image.height - 1);
+
+    cropXInput.max = String(maxX);
+    cropYInput.max = String(maxY);
+    cropWidthInput.max = String(image.width);
+    cropHeightInput.max = String(image.height);
+
+    if (!cropRect) {
+        cropRect = {
+            x: 0,
+            y: 0,
+            width: image.width,
+            height: image.height
+        };
+    }
+
+    cropXInput.value = String(cropRect.x);
+    cropYInput.value = String(cropRect.y);
+    cropWidthInput.value = String(cropRect.width);
+    cropHeightInput.value = String(cropRect.height);
+}
+
+function getActiveCropRect() {
+    if (!image) {
+        return null;
+    }
+
+    if (!cropRect) {
+        return {
+            x: 0,
+            y: 0,
+            width: image.width,
+            height: image.height
+        };
+    }
+
+    return {
+        x: Math.min(cropRect.x, image.width - 1),
+        y: Math.min(cropRect.y, image.height - 1),
+        width: Math.max(1, Math.min(cropRect.width, image.width - cropRect.x)),
+        height: Math.max(1, Math.min(cropRect.height, image.height - cropRect.y))
+    };
+}
+
 function drawMeme() {
 
     if (!image) {
         return;
     }
 
+    const activeCrop = getActiveCropRect();
+
+    canvas.width = activeCrop.width;
+    canvas.height = activeCrop.height;
 
     // Clear canvas
     ctx.clearRect(
@@ -143,9 +211,13 @@ function drawMeme() {
     );
 
 
-    // Draw original image
+    // Draw cropped image
     ctx.drawImage(
         image,
+        activeCrop.x,
+        activeCrop.y,
+        activeCrop.width,
+        activeCrop.height,
         0,
         0,
         canvas.width,
@@ -378,6 +450,68 @@ fontFamilyInput.addEventListener(
     drawMeme
 );
 
+cropToggleBtn.addEventListener("click", function () {
+    cropPanel.classList.toggle("hidden");
+});
+
+cropXInput.addEventListener("input", function () {
+    if (!cropRect) {
+        cropRect = { x: 0, y: 0, width: image.width, height: image.height };
+    }
+    cropRect.x = Number(cropXInput.value);
+    drawMeme();
+});
+
+cropYInput.addEventListener("input", function () {
+    if (!cropRect) {
+        cropRect = { x: 0, y: 0, width: image.width, height: image.height };
+    }
+    cropRect.y = Number(cropYInput.value);
+    drawMeme();
+});
+
+cropWidthInput.addEventListener("input", function () {
+    if (!cropRect) {
+        cropRect = { x: 0, y: 0, width: image.width, height: image.height };
+    }
+    cropRect.width = Number(cropWidthInput.value);
+    drawMeme();
+});
+
+cropHeightInput.addEventListener("input", function () {
+    if (!cropRect) {
+        cropRect = { x: 0, y: 0, width: image.width, height: image.height };
+    }
+    cropRect.height = Number(cropHeightInput.value);
+    drawMeme();
+});
+
+applyCropBtn.addEventListener("click", function () {
+    if (!image) {
+        return;
+    }
+
+    const nextRect = getActiveCropRect();
+    cropRect = nextRect;
+    updateCropControls();
+    drawMeme();
+});
+
+resetCropBtn.addEventListener("click", function () {
+    if (!image) {
+        return;
+    }
+
+    cropRect = {
+        x: 0,
+        y: 0,
+        width: image.width,
+        height: image.height
+    };
+
+    updateCropControls();
+    drawMeme();
+});
 
 // ================================
 // Download Meme
@@ -458,6 +592,8 @@ resetBtn.addEventListener(
 
         // Remove image
         image = null;
+        cropRect = null;
+        cropPanel.classList.add("hidden");
 
 
         // Clear canvas
