@@ -50,6 +50,40 @@
                 >
             </div>
 
+            <div class="crop-panel hidden" id="cropPanel">
+                <div class="crop-header">
+                    <h3>Crop Image</h3>
+                    <button type="button" id="cropToggleBtn" class="mini-btn">Edit Crop</button>
+                </div>
+
+                <div class="crop-controls">
+                    <div class="crop-field">
+                        <label for="cropX">Left</label>
+                        <input type="range" id="cropX" min="0" max="0" value="0">
+                    </div>
+
+                    <div class="crop-field">
+                        <label for="cropY">Top</label>
+                        <input type="range" id="cropY" min="0" max="0" value="0">
+                    </div>
+
+                    <div class="crop-field">
+                        <label for="cropWidth">Width</label>
+                        <input type="range" id="cropWidth" min="1" max="1" value="1">
+                    </div>
+
+                    <div class="crop-field">
+                        <label for="cropHeight">Height</label>
+                        <input type="range" id="cropHeight" min="1" max="1" value="1">
+                    </div>
+                </div>
+
+                <div class="crop-actions">
+                    <button type="button" id="applyCropBtn" class="secondary-btn small-btn">Apply Crop</button>
+                    <button type="button" id="resetCropBtn" class="mini-btn">Reset</button>
+                </div>
+            </div>
+
 
             <!-- Top Text -->
             <div class="control-group">
