@@ -195,6 +195,79 @@ body {
     text-transform: uppercase;
 }
 
+.crop-panel {
+    background: rgba(15, 23, 42, 0.78);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+    margin: 0 auto 22px;
+    max-width: 100%;
+}
+
+.crop-panel.hidden {
+    display: none;
+}
+
+.crop-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.crop-header h3 {
+    font-size: 0.95rem;
+    color: var(--text);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.crop-controls {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
+    gap: 12px;
+}
+
+.crop-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.crop-field label {
+    display: block;
+    margin-bottom: 0;
+    color: var(--muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.crop-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.mini-btn,
+.small-btn {
+    padding: 10px 12px;
+    font-size: 0.8rem;
+    border-radius: 10px;
+}
+
+.mini-btn {
+    background: rgba(148, 163, 184, 0.12);
+    color: var(--text);
+    border: 1px solid var(--border);
+    cursor: pointer;
+}
+
+.small-btn {
+    flex: 1;
+}
+
 input[type="text"],
 select,
 input[type="file"] {
