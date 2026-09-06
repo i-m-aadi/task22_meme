@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meme Generator</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <span>MEME</span>GEN
+        </div>
+
+        <p>Create. Customize. Download.</p>
+    </header>
+
+
+    <main class="container">
+
+        <!-- Controls -->
+        <section class="controls">
+
+            <h1>Meme Generator</h1>
+            <p class="subtitle">
+                Upload an image, add your text and create your own meme.
+            </p>
+
+
+            <!-- Image Upload -->
+            <div class="control-group">
+                <label for="imageUpload">Choose Image</label>
+
+                <input
+                    type="file"
+                    id="imageUpload"
+                    accept="image/*"
+                >
+            </div>
+
+
+            <!-- Top Text -->
+            <div class="control-group">
+                <label for="topText">Top Text</label>
+
+                <input
+                    type="text"
+                    id="topText"
+                    placeholder="Enter top text..."
+                >
+            </div>
+
+
+            <!-- Bottom Text -->
+            <div class="control-group">
+                <label for="bottomText">Bottom Text</label>
+
+                <input
+                    type="text"
+                    id="bottomText"
+                    placeholder="Enter bottom text..."
+                >
+            </div>
+
+
+            <!-- Font Size -->
+            <div class="control-group">
+
+                <label for="fontSize">
+                    Font Size:
+                    <span id="fontSizeValue">48</span>px
+                </label>
+
+                <input
+                    type="range"
+                    id="fontSize"
+                    min="20"
+                    max="100"
+                    value="48"
+                >
+
+            </div>
+
+
+            <!-- Text Color -->
+            <div class="control-group">
+
+                <label for="textColor">
+                    Text Color
+                </label>
+
+                <input
+                    type="color"
+                    id="textColor"
+                    value="#ffffff"
+                >
+
+            </div>
+
+
+            <!-- Stroke Color -->
+            <div class="control-group">
+
+                <label for="strokeColor">
+                    Outline Color
+                </label>
+
+                <input
+                    type="color"
+                    id="strokeColor"
+                    value="#000000"
+                >
+
+            </div>
+
+
+            <!-- Stroke Width -->
+            <div class="control-group">
+
+                <label for="strokeWidth">
+                    Outline Width:
+                    <span id="strokeWidthValue">4</span>
+                </label>
+
+                <input
+                    type="range"
+                    id="strokeWidth"
+                    min="0"
+                    max="15"
+                    value="4"
+                >
+
+            </div>
+
+
+            <!-- Font -->
+            <div class="control-group">
+
+                <label for="fontFamily">
+                    Font
+                </label>
+
+                <select id="fontFamily">
+
+                    <option value="Impact">
+                        Impact
+                    </option>
+
+                    <option value="Arial">
+                        Arial
+                    </option>
+
+                    <option value="Verdana">
+                        Verdana
+                    </option>
+
+                    <option value="Georgia">
+                        Georgia
+                    </option>
+
+                    <option value="Courier New">
+                        Courier New
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Buttons -->
+            <div class="buttons">
+
+                <button
+                    id="resetBtn"
+                    class="secondary-btn"
+                >
+                    Reset
+                </button>
+
+                <button
+                    id="downloadBtn"
+                    class="download-btn"
+                >
+                    Download Meme
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- Preview -->
+        <section class="preview">
+
+            <div class="preview-header">
+                <h2>Preview</h2>
+
+                <span id="imageStatus">
+                    No image selected
+                </span>
+            </div>
+
+            <div class="canvas-container">
+
+                <canvas id="memeCanvas">
+                </canvas>
+
+                <div
+                    id="emptyState"
+                    class="empty-state"
+                >
+                    <div class="upload-icon">🖼️</div>
+
+                    <h3>Upload an image</h3>
+
+                    <p>
+                        Select an image to start creating your meme.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <p>
+            Meme Generator • Built with HTML5 Canvas
+        </p>
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
