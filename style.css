@@ -50,6 +50,26 @@ body {
     box-shadow: 0 10px 25px rgba(2, 6, 23, 0.25);
 }
 
+.brand-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.brand-mark {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.22), rgba(139, 92, 246, 0.26));
+    border: 1px solid rgba(249, 115, 22, 0.45);
+    color: var(--highlight);
+    font-weight: 900;
+    font-size: 1.25rem;
+    box-shadow: 0 10px 25px rgba(249, 115, 22, 0.2);
+}
+
 .logo {
     font-size: 1.7rem;
     font-weight: 800;
